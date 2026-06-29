@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2 #  Upgraded version tag to support newer node dependencies
 
       - name: Set up Kubernetes CLI Connection
-        uses: azure/k8s-set-context@v4
+        uses: azure/k8s-set-context@v5.1.1 #  Upgraded to clear out Node 20 deprecations
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
@@ -19,4 +19,5 @@ jobs:
       - name: Execute Live Deployment
         run: |
           kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/service.yml
 

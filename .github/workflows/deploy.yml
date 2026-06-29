@@ -3,15 +3,18 @@ on:
   push:
     branches: [ main ]
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true" #  Forces runner to execute despite Node deprecations
+
 jobs:
   pipeline-delivery:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
-        uses: actions/checkout@v4.2.2 #  Upgraded version tag to support newer node dependencies
+        uses: actions/checkout@v4
 
       - name: Set up Kubernetes CLI Connection
-        uses: azure/k8s-set-context@v5.1.1 #  Upgraded to clear out Node 20 deprecations
+        uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}

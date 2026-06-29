@@ -13,6 +13,12 @@ jobs:
       - name: Import Code Tree
         uses: actions/checkout@v7
 
+      - name: Run YAML Lint 
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+          config_file: .yamllint
+  
       - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v5
         with:

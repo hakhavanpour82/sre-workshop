@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true" # Forces Node 20 actions to run under Node 24 smoothly
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   pipeline-delivery:
@@ -13,12 +13,11 @@ jobs:
       - name: Import Code Tree
         uses: actions/checkout@v7
 
-      - name: Run YAML Lint 
-        uses: ibiqlik/action-yamllint@v3
-        with:
-          file_or_dir: .
-          config_file: .yamllint
-  
+      - name: Install and Run Native YAML Lint 
+        run: |
+          sudo apt-get update && sudo apt-get install -y yamllint
+          yamllint -c .yamllint .
+
       - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v5
         with:

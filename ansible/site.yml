@@ -1,0 +1,9 @@
+- name: Verify Hetzner Engine Node Health
+  hosts: hetzner
+  gather_facts: yes
+  tasks:
+    - name: Ensure system updates are verified
+      apt:
+        update_cache: yes
+        name: curl
+        state: present

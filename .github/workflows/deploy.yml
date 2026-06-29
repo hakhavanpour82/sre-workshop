@@ -1,0 +1,22 @@
+name: GitOps Engine Pipeline
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  pipeline-delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import Code Tree
+        uses: actions/checkout@v4
+
+      - name: Set up Kubernetes CLI Connection
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Execute Live Deployment
+        run: |
+          kubectl apply -f k8s/deployment.yml
+

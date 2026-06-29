@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
 
       - name: Install and Run Native YAML Lint
         run: |
@@ -19,7 +19,7 @@ jobs:
           yamllint -c .yamllint .
 
       - name: Set up Kubernetes CLI Connection
-        uses: azure/k8s-set-context@v5
+        uses: azure/k8s-set-context@v7
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}

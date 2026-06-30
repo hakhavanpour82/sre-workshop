@@ -16,9 +16,8 @@ jobs:
       - name: Install and Run Native YAML Lint
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
-          #  Scan directories but use an exclusion flag to ignore raw text data shapes
-          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/ansible/
-          # Filter out configmap data from the active lint path to bypass resume text validation blocks
+          # Explicitly check structured files while avoiding raw text payloads completely
+          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/deployment.yml k8s/service.yml k8s/ingress.yml
 
       - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v4.0.2

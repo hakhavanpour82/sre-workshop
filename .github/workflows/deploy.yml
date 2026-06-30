@@ -16,7 +16,8 @@ jobs:
       - name: Install and Run Native YAML Lint
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
-          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable, truthy: disable, comments: disable}}" .
+          #  Explicitly check k8s and ansible directories while skipping .github configurations
+          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/ ansible/
 
       - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v4.0.2

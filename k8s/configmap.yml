@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: website-content
+  namespace: default
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hassan Akhavanpour | DevOps Engineer</title>
+        <style>
+            :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; --text: #f8fafc; --muted: #94a3b8; }
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+            .container { max-width: 800px; margin: 40px auto; background: var(--card); padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-top: 4px solid var(--accent); }
+            h1 { margin: 0 0 5px 0; color: #fff; font-size: 2.5rem; }
+            .title { color: var(--accent); font-weight: 600; font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+            .contact { margin-bottom: 30px; font-size: 0.95rem; color: var(--muted); }
+            .contact a { color: var(--accent); text-decoration: none; margin-right: 15px; }
+            .contact a:hover { text-decoration: underline; }
+            h2 { border-bottom: 1px solid #334155; padding-bottom: 8px; margin-top: 35px; color: #fff; font-size: 1.4rem; }
+            .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+            .badge { background: #334155; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; color: #e2e8f0; border: 1px solid #475569; }
+            .job { margin-bottom: 25px; }
+            .job-header { display: flex; justify-content: space-between; font-weight: 600; color: #fff; margin-bottom: 5px; }
+            .job-meta { font-size: 0.85rem; color: var(--accent); margin-bottom: 10px; }
+            ul { padding-left: 20px; margin: 5px 0; color: #cbd5e1; font-size: 0.95rem; }
+            li { margin-bottom: 6px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>HASSAN AKHAVANPOUR</h1>
+            <div class="title">DevOps Engineer</div>
+            <div class="contact">
+                ✉️ <a href="mailto:hakhavanpour82@gmail.com">hakhavanpour82@gmail.com</a>
+                🔗 <a href="https://linkedin.com" target="_blank">linkedin.com/in/hassan-akhavanpour</a>
+            </div>
+
+            <h2>PROFESSIONAL SUMMARY</h2>
+            <p style="color: #cbd5e1; font-size: 0.95rem;">Results-driven DevOps Engineer with 4+ years of experience designing and maintaining CI/CD pipelines, containerized infrastructure, and cloud-native solutions. Proven track record of automating deployments, reducing manual overhead, and bridging the gap between development and operations.</p>
+
+            <h2>TECHNICAL SKILLS</h2>
+            <div class="skills-grid">
+                <div class="badge">GitLab CI/CD</div><div class="badge">GitHub Actions</div><div class="badge">Jenkins</div><div class="badge">Git</div>
+                <div class="badge">Docker</div><div class="badge">Kubernetes (K8s)</div><div class="badge">Terraform</div><div class="badge">Ansible</div>
+                <div class="badge">AWS (EC2, S3, VPC)</div><div class="badge">Hetzner Cloud</div><div class="badge">Linux (Ubuntu)</div>
+                <div class="badge">Prometheus</div><div class="badge">Zabbix</div><div class="badge">Python (Flask)</div><div class="badge">Bash</div>
+                <div class="badge">MongoDB</div><div class="badge">PostgreSQL</div><div class="badge">MySQL</div><div class="badge">DNS / TLS / SSL</div>
+            </div>
+
+            <h2>WORK EXPERIENCE</h2>
+            <div class="job">
+                <div class="job-header"><span>DevOps Engineer (Part-time)</span><span>AK Software</span></div>
+                <div class="job-meta">11/2025 – 03/2026 | Berlin, Germany</div>
+                <ul>
+                    <li>Designed and deployed containerized application stacks using Docker Compose on Hetzner cloud servers.</li>
+                    <li>Built and maintained GitLab CI/CD pipelines with Kaniko for image builds and SSH-based deployment automation.</li>
+                    <li>Implemented Portainer webhook-based continuous deployment, enabling zero-touch releases.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header"><span>Trust & Safety Expert</span><span>Teleperformance Digital Services</span></div>
+                <div class="job-meta">10/2023 – 09/2026 | Berlin, Germany</div>
+                <ul>
+                    <li>Reviewed and moderated digital content at scale, applying policy frameworks to protect platform integrity under tight SLAs.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header"><span>DevOps Engineer</span><span>BRTech Co.</span></div>
+                <div class="job-meta">07/2020 – 12/2022 | Tehran, Iran</div>
+                <ul>
+                    <li>Designed and implemented GitLab CI/CD pipelines, accelerating deployment cycles by 50%.</li>
+                    <li>Automated infrastructure provisioning with Terraform and Ansible, reducing manual configuration effort by 40%.</li>
+                    <li>Led containerization initiatives migrating legacy applications to Kubernetes clusters.</li>
+                </ul>
+            </div>
+
+            <h2>EDUCATION</h2>
+            <ul>
+                <li><strong>M.Sc. Data Analytics</strong> - Berlin School of Business and Innovation (2022 – 2024)</li>
+                <li><strong>M.Eng. System Telecommunications</strong> - Shahid Beheshti University (2013 – 2015)</li>
+                <li><strong>B.Sc. Electrical Engineering</strong> -扬州大学 South Tehran Branch (2003 – 2008)</li>
+            </ul>
+        </div>
+    </body>
+    </html>
+

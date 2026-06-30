@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
-        uses: actions/checkout@v5
+        uses: actions/checkout@5
 
       - name: Install and Run Native YAML Lint
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
-          
           yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable, truthy: disable, comments: disable}}" .
 
       - name: Set up Kubernetes CLI Connection

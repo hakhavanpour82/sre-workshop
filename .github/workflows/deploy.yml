@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
-        uses: actions/checkout@5
+        uses: actions/checkout@v4.2.2
 
       - name: Install and Run Native YAML Lint
         run: |

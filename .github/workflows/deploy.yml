@@ -16,7 +16,6 @@ jobs:
       - name: Install and Run Native YAML Lint
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
-          # Explicitly check structured files while avoiding raw text payloads completely
           yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/deployment.yml k8s/service.yml k8s/ingress.yml
 
       - name: Set up Kubernetes CLI Connection

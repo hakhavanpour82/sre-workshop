@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "traefik" # Instructs K3s's built-in Traefik engine to own this route
+spec:
+  rules:
+  - host: akhavanpour.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-app-service # Must match your exact service name
+            port:
+              number: 80
+  - host: www.akhavanpour.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-app-service
+            port:
+              number: 80

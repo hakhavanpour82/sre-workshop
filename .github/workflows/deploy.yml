@@ -10,39 +10,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code Repository
-        uses: actions/checkout@v4
+      - name: Import Code Tree
+        uses: actions/checkout@v4.2.2
 
-      - name: Set Kubernetes Cluster Context
+      - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v4.0.2
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Deploy Prerequisites and App Manifests
+      - name: Execute Live Deployment
         run: |
-          # Install cert-manager platform resources
-          kubectl apply -f https://github.com
-
-          # Wait up to 60 seconds to ensure the webhook engine is ready
-          kubectl rollout status deployment/cert-manager-webhook -n cert-manager --timeout=60s
-
-          # Deploy your individual workspace configurations
-          kubectl apply -f k8s/cert-manager-issuer.yml
-          kubectl apply -f k8s/service.yml
+          kubectl apply -f k8s/configmap.yml
           kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/service.yml
           kubectl apply -f k8s/ingress.yml
-
-      - name: Commit Updated Manifests
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add k8s/deployment.yml k8s/ingress.yml
-
-          # Correct Bash if/else syntax
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: auto-update kubernetes manifests [skip ci]"
-            git push origin feature/automated-tls
-          else
-            echo "No changes detected. Skipping commit to avoid error."
-          fi

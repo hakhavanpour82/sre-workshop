@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - akhavanpour.com
-        - ://akhavanpour.com
+        - www.akhavanpour.com
       secretName: akhavanpour-com-tls
   rules:
     - host: akhavanpour.com
@@ -22,16 +22,17 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: web-service
+                name: internal-app-service
                 port:
                   number: 80
-    - host: ://akhavanpour.com
+    - host: www.akhavanpour.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: web-service
+                name: internal-app-service
                 port:
                   number: 80
+

@@ -10,6 +10,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production-private-key
     solvers:
-    - http01:
-        ingress:
-          class: traefik
+      - http01:
+          ingress:
+            class: traefik
+    server: https://letsencrypt.org

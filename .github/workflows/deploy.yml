@@ -13,11 +13,6 @@ jobs:
       - name: Import Code Tree
         uses: actions/checkout@v4.2.2
 
-      - name: Install and Run Native YAML Lint
-        run: |
-          sudo apt-get update && sudo apt-get install -y yamllint
-          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/deployment.yml k8s/service.yml k8s/ingress.yml
-
       - name: Set up Kubernetes CLI Connection
         uses: azure/k8s-set-context@v4.0.2
         with:

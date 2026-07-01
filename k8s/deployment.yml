@@ -25,10 +25,9 @@ spec:
               memory: "32Mi"
           volumeMounts:
             - name: html-volume
-              mountPath: /usr/share/nginx/html/index.html #  Point directly to the exact file path
-              subPath: index.html #  Force mount this specific subPath key to overwrite the target file
+              mountPath: /usr/share/nginx/html/index.html  # Two spaces before comment
+              subPath: index.html  # Two spaces before comment
       volumes:
         - name: html-volume
           configMap:
             name: website-content
-

@@ -18,17 +18,20 @@ spec:
           image: nginx:alpine
           ports:
             - containerPort: 80
-          resources:
-            limits:
-              memory: "64Mi"
-            requests:
-              memory: "32Mi"
           volumeMounts:
             - name: html-volume
-              mountPath: /usr/share/nginx/html/index.html #  Point directly to the exact file path
-              subPath: index.html #  Force mount this specific subPath key to overwrite the target file
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+          
+          # UPDATE THIS RESOURCE BLOCK HERE
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
       volumes:
         - name: html-volume
           configMap:
             name: website-content
-

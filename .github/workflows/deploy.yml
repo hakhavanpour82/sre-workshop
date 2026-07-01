@@ -1,13 +1,13 @@
-name: GitOps Engine Pipeline
-on:
-  push:
-    branches: [ main ]
+---
+name: GitOps Deployment Engine
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+"on":
+  push:
+    branches:
+      - main
 
 jobs:
-  pipeline-delivery:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Import Code Tree
@@ -24,4 +24,4 @@ jobs:
           kubectl apply -f k8s/configmap.yml
           kubectl apply -f k8s/deployment.yml
           kubectl apply -f k8s/service.yml
-          kubectl apply -f k8s/ingress.yml 
+          kubectl apply -f k8s/ingress.yml

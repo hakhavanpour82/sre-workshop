@@ -1,43 +1,34 @@
-name: GitOps Engine Pipeline
-on:
-  push:
-    branches: [ main ]
+---
+name: GitOps Deployment Engine
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+"on":
+  push:
+    branches:
+      - main
 
 jobs:
-  pipeline-delivery:
+  lint-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Import Code Tree
-        uses: actions/checkout@v4.2.2
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
 
       - name: Install and Run Native YAML Lint
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
-          yamllint -d "{extends: default, rules: {line-length: disable, indentation: disable, document-start: disable}}" k8s/deployment.yml k8s/service.yml k8s/ingress.yml
+          yamllint k8s/cert-manager-issuer.yml k8s/deployment.yml k8s/ingress.yml k8s/service.yml .github/workflows/deploy.yml
 
-      - name: Set up Kubernetes CLI Connection
+      - name: Set Kubernetes Cluster Context
         uses: azure/k8s-set-context@v4.0.2
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
+
       - name: Deploy Prerequisites and App Manifests
         run: |
-          # 1. Apply official cert-manager controllers and CRDs directly to the cluster
           kubectl apply -f https://github.com
-          
-          # 2. Wait briefly to ensure cert-manager webhooks are active
           kubectl rollout status deployment/cert-manager-webhook -n cert-manager --timeout=60s
-          
-          # 3. Apply your repository workspace manifests
-          kubectl apply -f k8s/
-
-
-      - name: Execute Live Deployment
-        run: |
-          kubectl apply -f k8s/configmap.yml
-          kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/cert-manager-issuer.yml
           kubectl apply -f k8s/service.yml
+          kubectl apply -f k8s/deployment.yml
           kubectl apply -f k8s/ingress.yml

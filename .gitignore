@@ -1,0 +1,17 @@
+# Ignore workshop media files and screen recordings
+*.jpg
+*.jpeg
+*.png
+*.mp4
+
+# Ignore local debug logs and scratch text files
+*.txt
+*.log
+
+# Ignore local environment configurations (if any)
+.env
+.env.local
+
+# Ignore OS specific artifact directories
+.DS_Store
+Thumbs.db
